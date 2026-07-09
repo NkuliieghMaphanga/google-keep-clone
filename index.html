@@ -3,196 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Keep Clone | Nonkululeko Maphanga</title>
+    <title>Google Keep Clone</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    >
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- HEADER -->
 
-    <header class="header">
+    <header class="top-nav">
 
-        <div class="logo">
-            <i class="fa-solid fa-note-sticky"></i>
-            <h1>Google Keep Clone</h1>
+        <div class="nav-left">
+
+            <button class="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="logo">
+                <img src="./assets/banner/keep logo.png" alt="Google Keep Logo">
+                <h2>Keep</h2>
+            </div>
+
         </div>
 
-        <div class="header-controls">
+        <div class="search-container">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
 
             <input
                 type="text"
                 id="searchInput"
                 placeholder="Search notes..."
             >
+            
 
-            <button
-                id="themeToggle"
-                title="Toggle Dark Mode"
-            >
-                🌙
+        </div>
+
+        <div class="nav-right">
+
+            <button id="themeToggle" title="Dark Mode">
+                <i class="fa-solid fa-moon"></i>
             </button>
+            
+             <button>
+                <img src="./assets/banner/reset.svg" alt="Reset">
+            </button>
+
+            <button>
+                <img src="./assets/banner/lines.svg" alt="Lines">
+            </button>
+
+            <button>
+                <img src="./assets/banner/setting.svg" alt="Settings">
+            </button>
+ 
+            <button>
+                <img src="./assets/banner/dot.svg" alt="More Options">
+            </button>
+
+             
+
+           
+
+            <div class="avatar">
+                <img src="./assets/banner/ChatGPT Image Jul 4, 2026, 02_27_57 PM.png" alt="User Avatar">
+            </div>
 
         </div>
 
     </header>
 
-    <!-- Main -->
+    <!-- MAIN LAYOUT -->
 
-    <main>
+    <div class="app-container">
 
-        <!-- Create Note Button -->
+        <!-- SIDEBAR -->
 
-        <div class="create-section">
-
-            <button
-                id="openModalBtn"
-                title="Create a new note"
-            >
-                <i class="fa-solid fa-plus"></i>
-                Create Note
+        <aside class="sidebar">
+            <button class="sidebar-link active" data-view="notes">
+                <img src="./assets/banner/lightbulb.svg" alt="Notes Icon">
+                <span>Notes</span>
             </button>
 
-        </div>
+            <button class="sidebar-link" data-view="reminders">
+                <img src="./assets/banner/reminder.svg" alt="Reminders Icon">
+                <span>Reminders</span>
+            </button>
+            
+            <button class="sidebar-link" data-view="edit">
+                <img src="./assets/banner/edit.svg" alt="Edit Icon">
+                <span>Edit</span>
+            </button>
 
-        <!-- Active Notes -->
+            <button class="sidebar-link" data-view="archive">
 
-        <section>
+                <i class="fa-solid fa-box-archive"></i>
 
-            <div class="section-title">
-                <h2>My Notes</h2>
-                <span id="notesCount">0 Notes</span>
-            </div>
+                <span>Archive</span>
 
-            <div id="notesContainer">
+            </button>
 
-                <div class="empty-state">
-                    <i class="fa-regular fa-note-sticky"></i>
-                    <h3>No Notes Yet</h3>
-                    <p>Create your first note.</p>
+            <button class="sidebar-link" data-view="bin">
+
+                <i class="fa-regular fa-trash-can"></i>
+
+                <span>Bin</span>
+
+            </button>
+
+            
+
+        </aside>
+
+        <!-- CONTENT -->
+
+        <main class="content">
+
+            <!-- CREATE NOTE -->
+
+            <div class="note-creator">
+
+                <input
+                    type="text" id="noteTitle" placeholder="Title">
+
+                <textarea id="noteText" placeholder="Take a note..."maxlength="500"
+                ></textarea>
+
+                <div class="creator-footer">
+
+                    <div class="creator-tools">
+
+                        <input
+                            type="color"
+                            id="noteColor"
+                            value="#fff8b8"
+                            title="Choose Note Color"
+                        >
+
+                        <span id="charCount">
+                            0 / 500
+                        </span>
+
+                    </div>
+
+                    <button id="addNoteBtn">
+                        Create Note
+                    </button>
+
                 </div>
 
             </div>
 
-        </section>
+            <!-- NOTES SECTION -->
 
-        <!-- Archived Notes -->
+            <section id="notesView">
 
-        <section>
+                <h2 class="section-heading">
+                    Notes
+                </h2>
 
-            <div class="section-title">
-                <h2>Archived Notes</h2>
-                <span id="archiveCount">0 Notes</span>
-            </div>
+                <div id="notesContainer" class="notes-grid">
 
-            <div id="archiveContainer">
-
-                <div class="empty-state">
-                    <i class="fa-solid fa-box-archive"></i>
-                    <h3>No Archived Notes</h3>
-                    <p>Archived notes will appear here.</p>
                 </div>
 
-            </div>
+            </section>
 
-        </section>
+            <!-- ARCHIVE SECTION -->
 
-    </main>
+            <section id="archiveView" class="hidden">
 
-    <!-- Create/Edit Note Modal -->
+                <h2 class="section-heading">
+                    Archive
+                </h2>
 
-    <div id="noteModal" class="modal">
+                <div id="archiveContainer" class="notes-grid">
+
+                </div>
+
+            </section>
+
+            <!-- BIN SECTION -->
+
+            <section id="binView" class="hidden">
+
+                <h2 class="section-heading">
+                    Bin
+                </h2>
+
+                <div id="binContainer" class="notes-grid">
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- EDIT NOTE MODAL -->
+
+    <div id="editModal" class="modal">
 
         <div class="modal-content">
 
-            <span id="closeModal" class="close-btn">
+            <span id="closeModal">
                 &times;
             </span>
 
-            <h2 id="modalTitle">
-                Create Note
-            </h2>
+            <h2>Edit Note</h2>
 
-            <form id="noteForm">
+            <input
+                type="text"
+                id="editTitle"
+                placeholder="Title"
+            >
 
-                <input
-                    type="text"
-                    id="noteTitle"
-                    placeholder="Note Title"
-                    maxlength="50"
-                    required
-                >
+            <textarea
+                id="editText"
+                placeholder="Edit your note..."
+            ></textarea>
 
-                <textarea
-                    id="noteText"
-                    placeholder="Write your note here..."
-                    maxlength="500"
-                    required
-                ></textarea>
+            <input
+                type="color"
+                id="editColor"
+            >
 
-                <div class="character-counter">
-                    <span id="charCount">
-                        0 / 500
-                    </span>
-                </div>
-
-                <div class="color-picker-section">
-
-                    <label for="noteColor">
-                        Note Color:
-                    </label>
-
-                    <input
-                        type="color"
-                        id="noteColor"
-                        value="#fff8b8"
-                    >
-
-                </div>
-
-                <button
-                    type="submit"
-                    id="saveNoteBtn"
-                >
-                    Save Note
-                </button>
-
-            </form>
+            <button id="updateNoteBtn">
+                Update Note
+            </button>
 
         </div>
 
     </div>
 
-    <!-- Delete Confirmation Modal -->
+    <!-- DELETE CONFIRMATION -->
 
     <div id="deleteModal" class="modal">
 
-        <div class="delete-modal-content">
+        <div class="modal-content small-modal">
 
-            <h2>Delete Note?</h2>
+            <h3>Delete Note?</h3>
 
             <p>
                 This action cannot be undone.
             </p>
 
-            <div class="delete-actions">
+            <div class="modal-actions">
 
-                <button
-                    id="confirmDelete"
-                    class="delete-btn"
-                >
+                <button id="confirmDelete">
                     Delete
                 </button>
 
-                <button
-                    id="cancelDelete"
-                    class="cancel-btn"
-                >
+                <button id="cancelDelete">
                     Cancel
                 </button>
 
@@ -202,22 +267,11 @@
 
     </div>
 
-    <!-- Toast Notification -->
+    <!-- TOAST -->
 
     <div id="toast">
-        Success Message
+
     </div>
-
-    <!-- Footer -->
-
-    <footer>
-
-        <p>
-            Built by Nonkululeko Mphoentle Maphanga
-        </p>
-
-    </footer>
-
     <script src="script.js"></script>
 
 </body>
